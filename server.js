@@ -33,8 +33,8 @@ app.use(passport.session());
 if (process.env.NODE_ENV != "test") {
   mongoose
     .connect(process.env.MONGODB_URI)
-    .then(() => console.log("MongoDB connected"))
-    .catch((err) => console.error(err));
+    .then(() => console.log("MongoDB connected to your personal cluster"))
+    .catch((err) => console.error("MongoDB connection error:", err));
 }
 
 // Swagger setup
@@ -62,21 +62,34 @@ console.log('swagger.json generated!');
 
 // Basic route
 app.get("/", (req, res) => {
-  res.send("Lettuce Shop API is running");
+  res.send("Lettuce Shop API is running with Google Auth");
 });
 
-// OAuth routes
-app.get(
-  "/auth/github",
-  passport.authenticate("github", { scope: ["user:email"], session: true }),
+// ============================
+// ACTUALIZACIÓN: OAuth Routes (Google en lugar de GitHub)
+// ============================
+
+app.get("/auth/google", (req, res, next) => {
+    console.log("Intentando autenticar con Google...");
+    passport.authenticate("google", { 
+        scope: ["profile", "email"] 
+    })(req, res, next);
+});
+
+app.get("/auth/google/callback",
+    passport.authenticate("google", { 
+        failureRedirect: "/",
+        session: true 
+    }),
+    (req, res) => {
+        console.log("Login exitoso para:", req.user.displayName);
+        res.redirect("/api-docs");
+    }
 );
 
-app.get(
-  "/auth/github/callback",
-  passport.authenticate("github", { failureRedirect: "/" }),
-  (req, res) => {
-    res.redirect("/api-docs");
-  },
+app.get("/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => { res.redirect("/api-docs"); }
 );
 
 app.get("/profile", (req, res) => {
