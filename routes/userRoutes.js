@@ -78,6 +78,12 @@ router.post('/', ensureAuthenticated, userValidationRules(), validate, userContr
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/user'
  *     responses:
  *       200:
  *         description: User updated

@@ -84,6 +84,12 @@ router.post(
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/store'
  *     responses:
  *       200:
  *         description: Store updated

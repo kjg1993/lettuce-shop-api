@@ -104,6 +104,12 @@ router.post('/', ensureAuthenticated, listValidationRules(), validate, listContr
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/list'
  *     responses:
  *       200:
  *         description: List updated
