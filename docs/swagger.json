@@ -225,6 +225,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/item"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Item updated"
@@ -353,6 +363,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/list"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "List updated"
@@ -517,6 +537,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/store"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Store updated"
@@ -645,6 +675,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "User updated"

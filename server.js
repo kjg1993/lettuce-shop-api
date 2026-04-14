@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-app.set("trust proxy", 1);
 const cors = require("cors");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -16,6 +15,7 @@ const storeRoutes = require("./routes/storeRoutes");
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
+app.set("trust proxy", 1);
 
 // Middleware
 app.use(cors());
